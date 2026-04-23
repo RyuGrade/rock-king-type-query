@@ -2,13 +2,22 @@
   "name": "rock-kingdom-type-query",
   "private": true,
   "version": "0.1.0",
+  "description": "Rock Kingdom Type Query desktop app",
+  "main": "electron/main.cjs",
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 5173",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "electron:dev": "concurrently -k \"vite --host 0.0.0.0 --port 5173\" \"wait-on tcp:5173 && electron .\"",
+    "electron:pack": "npm run build && electron-builder --dir",
+    "electron:dist": "npm run build && electron-builder",
+    "electron:dist:mac": "npm run build && electron-builder --mac",
+    "electron:dist:win": "npm run build && electron-builder --win",
+    "electron:dist:linux": "npm run build && electron-builder --linux",
+    "electron:dist:all": "npm run build && electron-builder --mac --win --linux"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -18,8 +27,44 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.3",
+    "concurrently": "^9.2.1",
+    "electron": "^41.3.0",
+    "electron-builder": "^26.8.1",
     "typescript": "^5.6.3",
     "vite": "^5.4.9",
-    "vitest": "^2.1.2"
+    "vitest": "^2.1.2",
+    "wait-on": "^9.0.5"
+  },
+  "build": {
+    "appId": "com.wanglong.rockkingdom.typequery",
+    "productName": "RockKingdomTypeQuery",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Utility"
+    }
   }
 }
