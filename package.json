@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "description": "Rock Kingdom Type Query desktop app",
+  "author": "wanglong",
   "main": "electron/main.cjs",
   "type": "module",
   "scripts": {
@@ -12,12 +13,12 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "electron:dev": "concurrently -k \"vite --host 0.0.0.0 --port 5173\" \"wait-on tcp:5173 && electron .\"",
-    "electron:pack": "npm run build && electron-builder --dir",
-    "electron:dist": "npm run build && electron-builder",
-    "electron:dist:mac": "npm run build && electron-builder --mac",
-    "electron:dist:win": "npm run build && electron-builder --win",
-    "electron:dist:linux": "npm run build && electron-builder --linux",
-    "electron:dist:all": "npm run build && electron-builder --mac --win --linux"
+    "electron:pack": "npm run build && electron-builder --dir --publish never",
+    "electron:dist": "npm run build && electron-builder --publish never",
+    "electron:dist:mac": "npm run build && electron-builder --mac --publish never",
+    "electron:dist:win": "npm run build && electron-builder --win --publish never",
+    "electron:dist:linux": "npm run build && electron-builder --linux --publish never",
+    "electron:dist:all": "npm run build && electron-builder --mac --win --linux --publish never"
   },
   "dependencies": {
     "react": "^18.3.1",
