@@ -18,9 +18,6 @@ jobs:
           - os: windows-latest
             target: win
             artifact_name: win-build
-          - os: ubuntu-latest
-            target: linux
-            artifact_name: linux-build
 
     runs-on: ${{ matrix.os }}
 
@@ -70,7 +67,3 @@ jobs:
             artifacts/**/*.zip
             artifacts/**/*.exe
             artifacts/**/*.msi
-            artifacts/**/*.AppImage
-            artifacts/**/*.deb
-            artifacts/**/*.rpm
-            artifacts/**/*.snap
